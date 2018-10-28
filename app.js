@@ -3,33 +3,17 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var express-validator=require('express-validator');
-var flash=require('connect-flash');
-var multer=require('multer');
-var session=require('session');
-
-app.use(session({
-	secret:'secret',
-	saveUninitialized:true,
-	resave:true
-}));
-
-app.use(flash());
-
-app.locals.moment=require('moment');
-app.use(function(res,res,next){
-	res.locals.messages,require('express-messages')(req,res);
-	next();
-})
-
-
+var expressValidator = require('express-validator');
+var flash = require('connect-flash');
+var multer = require('multer');
+var session = require('express-session');
+var upload = multer({ dest: './public/img/portfolio' });
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
 
-app.use(multer({dest: './public/img/portfolio'}))
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -40,6 +24,37 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({
+	secret: 'secret',
+	saveUninitialized:true,
+	resave:true
+}));
+
+app.use(flash());
+
+app.locals.moment=require('moment');
+app.use(function(res,res,next){
+	res.locals.messages = require('express-messages')(req,res);
+	next();
+});
+
+app.use(expressValidator({
+	errorformatter: function(param,msg,value) {
+		var namespace=param.split('.')
+		, root = namespace.shift()
+		, formParam = root;
+		
+		while(namespace.length){
+		formParm += '['+ namespace.shift() + ']';
+		}
+		return{
+			param:formParm,
+			msg :msg,
+			value :value
+		};
+	}
+}));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
