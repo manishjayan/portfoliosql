@@ -8,6 +8,22 @@ var flash=require('connect-flash');
 var multer=require('multer');
 var session=require('session');
 
+app.use(session({
+	secret:'secret',
+	saveUninitialized:true,
+	resave:true
+}));
+
+app.use(flash());
+
+app.locals.moment=require('moment');
+app.use(function(res,res,next){
+	res.locals.messages,require('express-messages')(req,res);
+	next();
+})
+
+
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
