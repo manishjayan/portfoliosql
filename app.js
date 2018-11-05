@@ -7,12 +7,13 @@ var expressValidator = require('express-validator');
 var flash = require('connect-flash');
 var multer = require('multer');
 var session = require('express-session');
-var upload = multer({ dest: './public/img/portfolio' });
+var upload = multer({dest: './public/images/portfolio'});
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
 
 
 // view engine setup
