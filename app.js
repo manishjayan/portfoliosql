@@ -17,7 +17,7 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -34,7 +34,7 @@ app.use(session({
 app.use(flash());
 
 app.locals.moment=require('moment');
-app.use(function(res,res,next){
+app.use(function(req,res,next){
 	res.locals.messages = require('express-messages')(req,res);
 	next();
 });
