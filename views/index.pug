@@ -1,5 +1,44 @@
 extends layout
-
 block content
-  h1= title
-  p Welcome to #{title}
+  section#portfolio.portfolio
+        .container
+          h2.text-center.text-uppercase.text-secondary.mb-0 Portfolio
+          hr.star-dark.mb-5
+          .row
+            each row, i in rows
+              .col-md-6.col-lg-4
+                a.portfolio-item.d-block.mx-auto(href='#portfolio-modal-'+i)
+                  .portfolio-item-caption.d-flex.position-absolute.h-100.w-100
+                    .portfolio-item-caption-content.my-auto.w-100.text-center.text-white
+                      i.fas.fa-search-plus.fa-3x
+                  img.img-fluid(src='img/portfolio/cabin.png', alt='')
+
+  each row, i in rows   
+    // Portfolio Modals
+    div(id='portfolio-modal-'+i).portfolio-modal.mfp-hide
+      .portfolio-modal-dialog.bg-white
+        a.close-button.d-none.d-md-block.portfolio-modal-dismiss(href='#')
+          i.fa.fa-3x.fa-times
+        .container.text-center
+          .row
+            .col-lg-8.mx-auto
+              h2.text-secondary.text-uppercase.mb-0 #{row.title}
+              hr.star-dark.mb-5
+              img.img-fluid.mb-5(src='img/portfolio/cabin.png', alt='')
+              p.mb-5
+                | #{row.description}
+              ul.list-inline.item-details
+                li
+                  | Client: 
+                  strong #{row.clients}
+                |                                 
+                li
+                  | Date: 
+                  strong #{moment(row.date).format("DD-MM-YY")}      
+                |                                 
+                li
+                  | Service: 
+                  strong #{row.service}
+              a.btn.btn-primary.btn-lg.rounded-pill.portfolio-modal-dismiss(href='#')
+                i.fa.fa-close
+                |           Close Project

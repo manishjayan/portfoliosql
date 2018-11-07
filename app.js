@@ -5,12 +5,10 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var expressValidator = require('express-validator');
 var flash = require('connect-flash');
-var multer = require('multer');
 var session = require('express-session');
-var upload = multer({dest: './public/images/portfolio'});
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var usersRouter = require('./routes/admin');
 
 var app = express();
 
@@ -58,7 +56,7 @@ app.use(expressValidator({
 }));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/admin', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

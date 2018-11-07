@@ -1,0 +1,35 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    link(rel='icon', href='../../../../favicon.ico')
+    title Starter Template for Bootstrap
+    // Bootstrap core CSS
+    link(href='/vendor/bootstrap/css/bootstrap.min.css', rel='stylesheet')
+    // Custom styles for this template
+    link(href='/css/dashboard.css', rel='stylesheet')
+  body
+    nav.navbar.navbar-expand-md.navbar-light.bg-light
+      a.navbar-brand(href='#') Portfolio
+      button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarsExampleDefault', aria-controls='navbarsExampleDefault', aria-expanded='false', aria-label='Toggle navigation')
+        span.navbar-toggler-icon
+      #navbarsExampleDefault.collapse.navbar-collapse
+        ul.navbar-nav.mr-auto
+          li.nav-item.active
+            a.nav-link(href='#')
+              | Dashboard
+              span.sr-only (current)
+          li.nav-item
+            a.nav-link(href='/admin/new') Add project
+          li.nav-item
+            a.nav-link(href='/') Visit site
+    !=messages()
+    block content
+    // /.container
+    //
+      Bootstrap core JavaScript
+      ==================================================
+    // Placed at the end of the document so the pages load faster
